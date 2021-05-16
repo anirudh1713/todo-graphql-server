@@ -8,9 +8,12 @@ module.exports = gql`
 
   type Query {
     todos: [Todo!]!
+    todo(id: Int!): Todo!
   }
 
   type Mutation {
     createTodo(title: String!): Todo!
+    editTodo(id: Int!, title: String!): Todo!
+    deleteTodo(id: Int!): Todo!
   }
 `;
