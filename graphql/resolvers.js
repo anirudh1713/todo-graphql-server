@@ -6,7 +6,10 @@ const rootResolver = {
   },
   Mutation: {
     ...todoResolvers.Mutation,
-  }
+  },
+  Subscription: {
+    ...todoResolvers.Subscription,
+  },
 };
 
 module.exports = rootResolver;

@@ -21,10 +21,12 @@ const getTodoById = async (_, args) => {
   }
 };
 
-const createTodo = async (_, args) => {
+const createTodo = async (_, args, ctx) => {
   const { title } = args;
+  const { pubsub } = ctx;
   try {
     const todo = await Todo.query().insertAndFetch({ title });
+    pubsub.publish('NEW_TODO', { todo });
     return todo;
   } catch (error) {
     console.log(error);

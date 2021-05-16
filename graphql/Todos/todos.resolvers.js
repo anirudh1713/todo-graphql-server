@@ -16,6 +16,14 @@ const todoResolvers = {
     editTodo: editTodo,
     deleteTodo: deleteTodo,
   },
+  Subscription: {
+    todo: {
+      subscribe: (_, __, ctx) => {
+        const { pubsub } = ctx;
+        return pubsub.asyncIterator('NEW_TODO');
+      },
+    }
+  },
 };
 
 module.exports = todoResolvers;

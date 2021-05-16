@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { ApolloServer } = require('apollo-server');
+const { ApolloServer, PubSub } = require('apollo-server');
 const Knex = require('knex');
 const { Model } = require('objection');
 const knexConfig = require('./knexfile');
@@ -11,9 +11,12 @@ const rootResolvers = require('./graphql/resolvers');
 const knex = Knex(knexConfig.development);
 Model.knex(knex);
 
+const pubsub = new PubSub();
+
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers: rootResolvers,
+  context: ({ req, res }) => ({ req, res, pubsub }),
 });
 
 // Check connection and start server.

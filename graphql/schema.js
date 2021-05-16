@@ -16,4 +16,8 @@ module.exports = gql`
     editTodo(id: Int!, title: String!): Todo!
     deleteTodo(id: Int!): Todo!
   }
+
+  type Subscription {
+    todo: Todo! 
+  }
 `;
